@@ -1,1 +1,175 @@
-## CUBRID Instance
+## Database > CUBRID Instance > 사용 가이드
+<br>
+## CUBRID Instance 생성
+
+CUBRID 를<span style="color:#313338"> 사용하기 위해서 먼저 인스턴스를 생성해야합니다.</span>
+
+![cubrid_instance_image_1.jpg](/files/3159570098353091366)
+
+CUBRID Instance 생성하기 **바로가기** 버튼을 클릭하면 **Compute > Instance > 인스턴스 생성** 으로 넘어갑니다.
+
+CUBRID 버전은 다음과 같이 2가지 종류가 제공됩니다.
+![cubrid_instance_image_2.jpg](/files/3159570239959078813)
+<br>
+* CUBRID 10.2.4
+    * CUBRID-10.2.4.8884-d6808c1-Linux.x86\_64.rpm
+* CUBRID 11.0.2
+    * CUBRID-11.0.2.0291-a507059-Linux.x86\_64.rpm
+
+CUBRID <span style="color:#313338">이미지 선택 후 추가 설정 완료 후 인스턴스를 생성합니다.</span>
+<span style="color:#313338">인스턴스 생성에 대한 자세한 내용은 </span>[Instance 개요](http://docs.toast.com/ko/Compute/Instance/ko/overview/)<span style="color:#313338">를 참고하시기 바랍니다.</span>
+
+<span style="color:#313338">인스턴스 생성 완료 후 SSH를 사용하여 인스턴스에 접근합니다.</span>
+인스턴스에 Floating IP가 연결되어있어야 하며 보안그룹에서 TCP 포트 22(SSH)가 허용되어야 합니다.
+
+![cubrid_instance_image_3.jpg](/files/3159570432887396921)
+
+<span style="color:#313338">SSH 클라이언트와 설정한 키페어를 이용해 인스턴스에 접속 합니다.</span>
+<span style="color:#313338">SSH 연결에 대한 자세한 가이드는 </span>[SSH 연결 가이드](https://docs.toast.com/ko/Compute/Instance/ko/overview/#linux)<span style="color:#313338">를 참고하시기 바랍니다.</span>
+## CUBRID 서비스 시작/정지 방법
+
+“cubrid” Linux 계정으로 로그인하여 CUBRID 서비스를 다음과 같이 시작하거나 종료할 수 있습니다.
+<br>
+```
+# CUBRID 서비스/서버 시작
+shell> sudo su - cubrid
+shell> cubrid service start 
+shell> cubrid server start demodb
+
+# CUBRID 서비스/서버 종료
+shell> sudo su - cubrid
+shell> cubrid server stop demodb
+shell> cubrid service stop 
+
+# CUBRID 서비스/서버 재시작
+shell> sudo su - cubrid
+shell> cubrid server restart demodb
+shell> cubrid service restart 
+
+# CUBRID 브로커 시작/종료/재시작
+shell> sudo su - cubrid
+shell> cubrid broker start
+shell> cubrid broker stop
+shell> cubrid broker restart
+```
+
+## CUBRID 접속
+
+<span style="color:#313338">이미지 생성 후 초기에는 아래와 같이 접속합니다.</span>
+<br>
+```
+shell> sudo su - cubrid
+shell> csql -u dba demodb@localhost
+```
+
+## CUBRID 인스턴스 생성 후 초기 설정
+
+### 1\. 비밀번호 설정
+
+기 설치 후 <span style="color:#24292f">CUBRID </span>dba 계정 비밀번호는 지정되어 있지 않습니다. 그러므로 설치 후 반드시 비밀번호를 설정해야 합니다.
+<br>
+```
+shell> csql -u dba -c "ALTER USER dba PASSWORD 'new_password'" demodb@localhost
+```
+
+### 2\. broker 포트\(port\) 변경
+
+**query\_editor**<span style="color:#404040"> 의 브로커 포트는 기본값이 </span>**30000**<span style="color:#404040"> 으로 설정되며, </span>**broker1**<span style="color:#404040"> 의 브로커 포트는 기본값이 </span>**33000**<span style="color:#404040"> 으로 설정됩니다.</span>
+보안상 포트 변경을 권장합니다.
+<br>
+###### 1)  broker  파일 수정
+
+아래 파일을 열어서 아래와 같이 변경할 포트 주소를 입력합니다.
+<br>
+```
+shell> vi /opt/cubrid/conf/cubrid_broker.conf
+
+[%query_editor]
+BROKER_PORT             =[변경할 port 주소]
+
+[%BROKER1]
+BROKER_PORT             =[변경할 port 주소]
+```
+
+###### 2) broker 재시작
+
+포트 변경이 적용되도록 broker를 재시작합니다.
+
+```
+shell> cubrid broker restart
+```
+
+### 3\. 매니저 서버 포트\(port\) 변경
+
+매니져 서버 포트는 기본값이 **8001** <span style="color:#404040">으로 설정됩니다. </span>
+보안상 포트 변경을 권장합니다.
+
+###### 1)  cm.conf 파일 수정
+
+아래 파일을 열어서 아래와 같이 변경할 포트 주소를 입력합니다.
+<br>
+```
+shell> vi /opt/cubrid/conf/cm.conf
+
+cm_port =[변경할 port 주소]
+```
+
+###### 2) 매니져 서버 재시작
+
+포트 변경이 적용되도록 매니져를 재시작합니다.
+<br>
+```
+shell> cubrid manager stop
+shell> cubrid manager start
+```
+<br>
+
+## CUBRID 디렉터리 설명
+
+<span style="color:#313338">CUBRID 디렉터리 및 파일 설명은 아래와 같습니다.</span>
+
+| 이름 | 설명 |
+| --- | --- |
+| database.txt | CUBRID 데이터베이스 위치 정보 파일 경로 - /opt/cubrid/databases |
+| CONF PATH | CUBRID 서버, 브로커, 매니져 환경변수 파일 경로 - /opt/cubrid/conf |
+| LOG PATH | CUBRID 프로세스 로그 파일 경로 - /opt/cubrid/log |
+| SQL\_LOG | CUBRID SQL Query 파일 경로  /opt/cubrid/log/broker/sql\_log |
+| ERROR\_LOG | CUBRID ERROR SQL Query 파일 경로 - /opt/cubrid/log/broker/error\_log |
+| SLOW\_LOG | CUBRID Slow Query 파일 경로 - /opt/cubrid/log/broker/sql\_log |
+
+### cubrid.conf 설명
+
+서버 설정용 파일로 운영하려는 데이터베이스의 메모리, 동시 사용자 수에 따른 스레드 수, 브로커와 서버 사이의 통신 포트 등을 설정 가능합니다.
+
+| 이름 | 설명 |
+| --- | --- |
+| <span style="color:#404040">service </span> | <span style="color:#404040"> CUBRID 서비스 시작 시 자동으로 시작하는 프로세스를 등록하는 파라미터 입니다. </span><br><span style="color:#404040">기본으로 server,broker,manager 프로세스가 등록 되어있습니다.</span> |
+| cubrid\_port\_id | 마스터 프로세스가 사용하는 포트입니다. |
+| max\_clients | <span style="color:#404040">데이터베이스 서버 프로세스 하나 당 동시에 접속할 수 있는 클라이언트의 최대 개수입니다.</span> |
+| data\_buffer\_size | <span style="color:#404040"> 데이터베이스 서버가 메모리 내에 캐시하는 데이터 버퍼의 크기를 설정하기 위한 파라미터 입니다. </span><br><span style="color:#404040"><span style="color:#404040">필요한 메모리 크기가 시스템 메모리의 2/3 이내가 되도록 설정할 것을 권장합니다.</span></span> |
+
+### broker.conf 설명
+
+브로커 설정용 파일로 운영하려는 브로커가 사용하는 포트, 응용서버(CAS) 수, SQL LOG 등을 설정 가능합니다.
+
+| 이름 | 설명 |
+| --- | --- |
+| BROKER\_PORT | 브로커가 사용하는 포트이며, 실제 JDBC와 같은 드라이버에서 보는 포트는 해당 브로커의 포트 입니다. |
+| <span style="color:#404040">MAX\_NUM\_APPL\_SERVER</span> | 해당 브로커에 동시 접속할 수 있는 CAS의 최대 개수를 설정하는 파라미터 입니다. |
+| <span style="color:#404040">MIN\_NUM\_APPL\_SERVER</span> | 해당 브로커에 대한 연결 요청이 없더라도 기본적으로 대기하고 있는 CAS 프로세스의 최소 개수를 설정하는 파라미터 입니다. |
+| LOG\_DIR | <span style="color:#404040">SQL 로그가 저장되는 디렉터리를 지정하는 파라미터 입니다.</span> |
+| ERROR\_LOG\_DIR | <span style="color:#404040">브로커에 대한 에러 로그가 저장되는 디렉터리를 지정하는 파라미터 입니다.</span> |
+
+### cm.conf 설명
+
+CUBRID 매니저용 파일로 운영하려는 매니저 서버 프로세스가 사용하는 포트, 모니터링 수집 주기 등을 설정 가능합니다.
+
+| 이름 | 설명 |
+| --- | --- |
+| cm\_port | 매니저 서버 프로세스가 사용하는 포트 입니다. |
+| <span style="color:#404040"><span style="color:#404040">cm\_process\_monitor\_interval</span></span> | 모니터링 정보 수집 주기입니다. |
+| <span style="color:#404040">support\_mon\_statistic</span> | 누적 모니터링을 사용할 것인지 설정하는 파라미터입니다. |
+| <span style="color:#404040">server\_long\_query\_time</span> | 서버의 진단 항목 중 slow\_query 항목을 설정할 경우 몇 초 이상을 늦은 질의로 판별할지 결정하는 파라미터입니다. |
+
+> [참고] 
+> CUBRID Instance 의 릴리스 현황은 [인스턴스 릴리스 노트](/Compute/ko/release-notes/)를 참고하시기 바랍니다.
