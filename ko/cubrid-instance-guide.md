@@ -1,15 +1,15 @@
 ## Database > CUBRID Instance > 사용 가이드
-<br>
+
 ## CUBRID Instance 생성
 
 CUBRID 를<span style="color:#313338"> 사용하기 위해서 먼저 인스턴스를 생성해야합니다.</span>
 
-![cubrid_instance_image_1.jpg](/files/3159570098353091366)
+![cubrid_instance_image_1.jpg](http://static.toastoven.net/prod_cubrid_instance/cubrid_instance_image_1.jpg)
 
 CUBRID Instance 생성하기 **바로가기** 버튼을 클릭하면 **Compute > Instance > 인스턴스 생성** 으로 넘어갑니다.
 
 CUBRID 버전은 다음과 같이 2가지 종류가 제공됩니다.
-![cubrid_instance_image_2.jpg](/files/3159570239959078813)
+![cubrid_instance_image_2.jpg](http://static.toastoven.net/prod_cubrid_instance/cubrid_instance_image_2.jpg)
 <br>
 * CUBRID 10.2.4
     * CUBRID-10.2.4.8884-d6808c1-Linux.x86\_64.rpm
@@ -22,7 +22,7 @@ CUBRID <span style="color:#313338">이미지 선택 후 추가 설정 완료 �
 <span style="color:#313338">인스턴스 생성 완료 후 SSH를 사용하여 인스턴스에 접근합니다.</span>
 인스턴스에 Floating IP가 연결되어있어야 하며 보안그룹에서 TCP 포트 22(SSH)가 허용되어야 합니다.
 
-![cubrid_instance_image_3.jpg](/files/3159570432887396921)
+![cubrid_instance_image_3.jpg](http://static.toastoven.net/prod_cubrid_instance/cubrid_instance_image_3.jpg)
 
 <span style="color:#313338">SSH 클라이언트와 설정한 키페어를 이용해 인스턴스에 접속 합니다.</span>
 <span style="color:#313338">SSH 연결에 대한 자세한 가이드는 </span>[SSH 연결 가이드](https://docs.toast.com/ko/Compute/Instance/ko/overview/#linux)<span style="color:#313338">를 참고하시기 바랍니다.</span>
