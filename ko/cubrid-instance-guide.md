@@ -6,11 +6,12 @@ CUBRID를 사용하려면 먼저 인스턴스를 생성해야 합니다.
 
 ![cubrid_instance_image_1.jpg](http://static.toastoven.net/prod_cubrid_instance/cubrid_instance_image_1.jpg)
 
-CUBRID Instance 생성하기 **바로 가기** 버튼을 클릭하면 **Compute > Instance > 인스턴스 생성**으로 이동합니다.
+**CUBRID Instance 생성**에 있는 **생성** 버튼을 클릭하면 **Compute > Instance > 인스턴스 생성**으로 이동합니다.
 
 CUBRID 버전은 다음과 같이 2가지 종류가 제공됩니다.
+
 ![cubrid_instance_image_2.jpg](http://static.toastoven.net/prod_cubrid_instance/cubrid_instance_image_2.jpg)
-<br>
+
 * CUBRID 10.2.4
     * CUBRID-10.2.4.8884-d6808c1-Linux.x86\_64.rpm
 * CUBRID 11.0.2
@@ -69,12 +70,12 @@ shell> csql -u dba demodb@localhost
 shell> csql -u dba -c "ALTER USER dba PASSWORD 'new_password'" demodb@localhost
 ```
 
-### 2\. broker 포트\(port\) 변경
+### 2\. 브로커 포트\(port\) 변경
 
 **query_editor** 의 브로커 포트는 기본값이 **30000** 으로 설정되며, **broker1** 의 브로커 포트는 기본값이 **33000** 으로 설정됩니다.
 보안상 포트 변경을 권장합니다.
 
-###### 1)  broker  파일 수정
+###### 1) 브로커 파일 수정
 
 아래 파일을 열어서 아래와 같이 변경할 포트 주소를 입력합니다.
 ```
@@ -87,9 +88,9 @@ BROKER_PORT             =[변경할 port 주소]
 BROKER_PORT             =[변경할 port 주소]
 ```
 
-###### 2) broker 재시작
+###### 2) 브로커 재시작
 
-포트 변경이 적용되도록 broker를 재시작합니다.
+포트 변경이 적용되도록 브로커를 재시작합니다.
 ```
 shell> cubrid broker restart
 ```
