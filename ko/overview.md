@@ -1,7 +1,7 @@
 ## Database > CUBRID Instance > 개요
 
 CUBRID가 설치된 가상 서버를 제공하는 서비스입니다.
-CUBRID버전, CPU, 메모리, 디스크를 선택하여 원하는 스펙의 CUBRID를 사용할 수 있습니다.
+CUBRID 버전, CPU, 메모리, 디스크를 선택하여 원하는 스펙의 CUBRID를 사용할 수 있습니다.
 
 ## 기능
 
