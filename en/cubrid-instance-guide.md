@@ -95,7 +95,7 @@ Restart the broker for the port change to take effect.
 shell> cubrid broker restart
 ```
 
-### 2\. Change the Manager Server Port
+### 3\. Change the Manager Server Port
 
 The manager server port defaults to **8001**.
 For security reasons, it is recommended to change the port.
