@@ -17,7 +17,7 @@ The following two types of CUBRID version are provided.
 * CUBRID 11.0.2
     * CUBRID-11.0.2.0291-a507059-Linux.x86\_64.rpm
 
-Select a CUBRID image and complete additional setup to create an instance. For more information on instance creation, see [Instance Overview](http://docs.toast.com/en/Compute/Instance/en/overview/).
+Select a CUBRID image and complete additional setup to create an instance. For more information on instance creation, see [Instance Overview](https://docs.nhncloud.com/en/Compute/Instance/en/overview/).
 
 After the instance creation is complete, use SSH to access the instance.
 The instance must have an associated floating IP and TCP port 22 (SSH) must be allowed in the security group.
@@ -25,7 +25,7 @@ The instance must have an associated floating IP and TCP port 22 (SSH) must be a
 ![cubrid_instance_image_3.jpg](http://static.toastoven.net/prod_cubrid_instance/cubrid_instance_image_3.jpg)
 
 Connect to the instance using an SSH client and the configured key pair.
-For a detailed guide on SSH connection, refer to [SSH Connection Guide](https://docs.toast.com/en/Compute/Instance/en/overview/#how-to-access-linux-instances).
+For a detailed guide on SSH connection, refer to [SSH Connection Guide](https://docs.nhncloud.com/en/Compute/Instance/en/overview/#how-to-access-linux-instances).
 
 ## How to Start/Stop the CUBRID service
 

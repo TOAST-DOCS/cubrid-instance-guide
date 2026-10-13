@@ -18,7 +18,7 @@ CUBRIDのバージョンは、次の2種類が提供されます。
     * CUBRID-11.0.2.0291-a507059-Linux.x86\_64.rpm
 
 CUBRIDイメージを選択し、追加設定を完了してインスタンスを作成します。
-インスタンス作成についての詳細は[Instance概要](http://docs.toast.com/ko/Compute/Instance/ko/overview/)を参照してください。
+インスタンス作成についての詳細は[Instance概要](https://docs.nhncloud.com/ko/Compute/Instance/ko/overview/)を参照してください。
 
 インスタンス作成完了後、SSHを使用してインスタンスにアクセスします。
 インスタンスにFloating IPが接続されていて、セキュリティグループでTCPポート22(SSH)が許可されている必要があります。
@@ -26,7 +26,7 @@ CUBRIDイメージを選択し、追加設定を完了してインスタンス�
 ![cubrid_instance_image_3.jpg](http://static.toastoven.net/prod_cubrid_instance/cubrid_instance_image_3.jpg)
 
 SSHクライアントと設定したキーペアを利用してインスタンスに接続します。
-SSH接続の詳細については[SSH接続ガイド](https://docs.toast.com/ko/Compute/Instance/ko/overview/#linux)を参照してください。
+SSH接続の詳細については[SSH接続ガイド](https://docs.nhncloud.com/ko/Compute/Instance/ko/overview/#linux)を参照してください。
 
 ## CUBRIDサービスの起動/停止方法
 
